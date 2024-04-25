@@ -8,7 +8,7 @@ from scrapy.exceptions import CloseSpider
 class HockeyTeamSpider(scrapy.Spider):
     name = "hockey"
     allowed_domains = ["www.scrapethissite.com"]
-    start_urls = ["https://www.scrapethissite.com/pages/forms/"]
+    start_urls = ["https://www.scrapethissite.com/pages/forms/?page_num=1"]
     handle_httpstatus_list = [404]
 
     def parse(self, response):
@@ -17,7 +17,6 @@ class HockeyTeamSpider(scrapy.Spider):
         
         for hockey in response.css('tr.team'):
             hockey_team = HockeyTeamLoader(item=HockeyTeamItem(), selector=hockey)
-
             hockey_team.add_css('name', 'td.name::text')
             hockey_team.add_css('year', 'td.year::text')
             hockey_team.add_css('wins', 'td.wins::text')
@@ -27,5 +26,9 @@ class HockeyTeamSpider(scrapy.Spider):
             hockey_team.add_css('goals_for', 'td.gf::text')
             hockey_team.add_css('goals_against', 'td.ga::text')
             hockey_team.add_css('more_less', 'diff.text-success')
-
             yield hockey_team.load_item()
+        
+        next_page = response.css('[aria-label="Next"]::attr(href)').get()
+        if next_page is not None:
+            next_page_url = "https://www.scrapethissite.com" + next_page
+            yield response.follow(next_page_url, callback=self.parse)
