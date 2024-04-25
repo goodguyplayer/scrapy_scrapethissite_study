@@ -7,6 +7,11 @@ from scrapy.exceptions import CloseSpider
 
 class HockeyTeamSpider(scrapy.Spider):
     name = "hockey"
+    custom_settings = {
+        "ITEM_PIPELINES" : {
+            'scrapethissite.pipelines.HockeysToMySQLPipeline' : 400
+        }
+    }
     allowed_domains = ["www.scrapethissite.com"]
     start_urls = ["https://www.scrapethissite.com/pages/forms/?page_num=1"]
     handle_httpstatus_list = [404]
@@ -25,7 +30,7 @@ class HockeyTeamSpider(scrapy.Spider):
             hockey_team.add_css('win_perc', 'td.pct.text-success::text')
             hockey_team.add_css('goals_for', 'td.gf::text')
             hockey_team.add_css('goals_against', 'td.ga::text')
-            hockey_team.add_css('more_less', 'diff.text-success')
+            hockey_team.add_css('more_less', 'td.diff.text-success::text')
             yield hockey_team.load_item()
         
         next_page = response.css('[aria-label="Next"]::attr(href)').get()
