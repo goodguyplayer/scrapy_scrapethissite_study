@@ -7,6 +7,11 @@ from scrapy.exceptions import CloseSpider
 
 class CountriesSpider(scrapy.Spider):
     name = "countries"
+    custom_settings = {
+        "ITEM_PIPELINES" : {
+            'scrapethissite.pipelines.CountriesToMySQLPipeline' : 400
+        }
+    }
     allowed_domains = ["www.scrapethissite.com"]
     start_urls = ["https://www.scrapethissite.com/pages/simple/"]
     handle_httpstatus_list = [404]
