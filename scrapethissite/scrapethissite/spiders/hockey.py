@@ -1,7 +1,7 @@
 import scrapy
 from pathlib import Path
 from scrapethissite.itemloaders import HockeyTeamLoader
-from scrapethissite.item import HockeyTeamItem
+from scrapethissite.items import HockeyTeamItem
 from scrapy.exceptions import CloseSpider
 
 

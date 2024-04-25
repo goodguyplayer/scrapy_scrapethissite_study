@@ -21,12 +21,12 @@ class CountryItem(scrapy.Item):
 
 
 class HockeyTeamItem(scrapy.Item):
-    name = Scrapy.Field()
-    year = Scrapy.Field()
-    wins = Scrapy.Field()
-    losses = Scrapy.Field()
-    ot_losses = Scrapy.Field()
-    win_perc = Scrapy.Field()
-    goals_for = Scrapy.Field()
-    goals_against = Scrapy.Field()
-    more_less = Scrapy.Field()
+    name = scrapy.Field()
+    year = scrapy.Field()
+    wins = scrapy.Field()
+    losses = scrapy.Field()
+    ot_losses = scrapy.Field()
+    win_perc = scrapy.Field()
+    goals_for = scrapy.Field()
+    goals_against = scrapy.Field()
+    more_less = scrapy.Field()
