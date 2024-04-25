@@ -15,17 +15,17 @@ class HockeyTeamSpider(scrapy.Spider):
         if response.status == 404:
             raise CloseSpider('Received 404 Response')
         
-        for hockey in response.css(''):
+        for hockey in response.css('tr.team'):
             hockey_team = HockeyTeamLoader(item=HockeyTeamItem(), selector=hockey)
 
-            hockey_team.add_css('name', '')
-            hockey_team.add_css('year', '')
-            hockey_team.add_css('wins', '')
-            hockey_team.add_css('losses', '')
-            hockey_team.add_css('ot_losses', '')
-            hockey_team.add_css('win_perc', '')
-            hockey_team.add_css('goals_for', '')
-            hockey_team.add_css('goals_against', '')
-            hockey_team.add_css('more_less', '')
+            hockey_team.add_css('name', 'td.name::text')
+            hockey_team.add_css('year', 'td.year::text')
+            hockey_team.add_css('wins', 'td.wins::text')
+            hockey_team.add_css('losses', 'td.losses::text')
+            hockey_team.add_css('ot_losses', 'td.ot-losses::text')
+            hockey_team.add_css('win_perc', 'td.pct.text-success::text')
+            hockey_team.add_css('goals_for', 'td.gf::text')
+            hockey_team.add_css('goals_against', 'td.ga::text')
+            hockey_team.add_css('more_less', 'diff.text-success')
 
             yield hockey_team.load_item()
