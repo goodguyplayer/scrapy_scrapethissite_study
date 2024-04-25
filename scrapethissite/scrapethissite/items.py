@@ -18,3 +18,15 @@ class CountryItem(scrapy.Item):
     capital = scrapy.Field()
     population = scrapy.Field()
     area = scrapy.Field()
+
+
+class HockeyTeamItem(scrapy.Item):
+    name = Scrapy.Field()
+    year = Scrapy.Field()
+    wins = Scrapy.Field()
+    losses = Scrapy.Field()
+    ot_losses = Scrapy.Field()
+    win_perc = Scrapy.Field()
+    goals_for = Scrapy.Field()
+    goals_against = Scrapy.Field()
+    more_less = Scrapy.Field()
