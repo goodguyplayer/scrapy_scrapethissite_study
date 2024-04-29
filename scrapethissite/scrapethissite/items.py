@@ -30,3 +30,11 @@ class HockeyTeamItem(scrapy.Item):
     goals_for = scrapy.Field()
     goals_against = scrapy.Field()
     more_less = scrapy.Field()
+
+
+class FilmItem(scrapy.Item):
+    title = scrapy.Field()
+    year = scrapy.Field()
+    awards = scrapy.Field()
+    nominations = scrapy.Field()
+    best_picture = scrapy.Field()

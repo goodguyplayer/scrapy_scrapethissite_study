@@ -20,3 +20,8 @@ class HockeyTeamLoader(ItemLoader):
     goals_for_in = MapCompose(lambda x: x.strip(), Join(""))
     goals_against_in = MapCompose(lambda x: x.strip(), Join(""))
     more_less_in = MapCompose(lambda x: x.strip(), Join(""))
+
+
+class FilmLoader(ItemLoader):
+    default_output_processor = TakeFirst()
+    

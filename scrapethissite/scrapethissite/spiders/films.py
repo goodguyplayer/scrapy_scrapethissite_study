@@ -3,8 +3,8 @@ import scrapy
 from pathlib import Path
 
 from scrapy.http import Response
-from scrapethissite.itemloaders import CountryItemLoader
-from scrapethissite.items import CountryItem
+from scrapethissite.itemloaders import FilmLoader
+from scrapethissite.items import FilmItem
 from scrapy.exceptions import CloseSpider
 
 
@@ -21,4 +21,6 @@ class FilmsSpider(scrapy.Spider):
 
 
     def parse(self, response):
+        for film in response.json():
+            film_data = FilmLoader(item=FilmItem(), selector=film)
         yield response.json()
